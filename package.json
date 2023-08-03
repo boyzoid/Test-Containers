@@ -4,7 +4,7 @@
   "description": "",
   "main": "spec/user-repository.test.js",
   "scripts": {
-    "test": "node --test --watch"
+    "test": "node --test --watch ./test"
   },
   "keywords": [],
   "author": "Scott Stroz",
