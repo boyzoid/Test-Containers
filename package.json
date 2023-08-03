@@ -4,7 +4,7 @@
   "description": "",
   "main": "spec/user-repository.test.js",
   "scripts": {
-    "test": "jest"
+    "test": "node --test --watch"
   },
   "keywords": [],
   "author": "Scott Stroz",
@@ -13,7 +13,6 @@
     "@mysql/xdevapi": "^8.0.33"
   },
   "devDependencies": {
-    "jest": "^29.6.1",
     "testcontainers": "^9.9.1"
   },
   "type": "module"
