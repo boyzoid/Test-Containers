@@ -1,4 +1,4 @@
-#Test Containers with MySQL
+# Test Containers with MySQL
 
 This repo aims to provide examples of using [Test Containers](https://node.testcontainers.org/) to test applications that interact with MySQL.
 
