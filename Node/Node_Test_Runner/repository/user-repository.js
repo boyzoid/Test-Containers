@@ -1,8 +1,10 @@
 import * as mysqlx from '@mysql/xdevapi'
-class UserRepo {
+import BaseRepository from './base-repository.js'
+export default class UserRepo extends BaseRepository{
     #connectionUrl
     #pool
     constructor(dbUser, dbPassword, dbHost, dbPort, schemaName) {
+        super()
         this.#connectionUrl =
             `mysqlx://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${schemaName}`
         this.#pool = mysqlx.getClient(this.#connectionUrl, {
@@ -44,18 +46,4 @@ class UserRepo {
         return ret;
         
     }
-
-    formatData(data, columns){
-        let ret = [];
-        data.forEach((row) =>{
-            let obj = {};
-            row.forEach((item,i)=>{
-                obj[columns[i].getColumnLabel()] = item;
-            })
-            ret.push(obj)
-        })
-        return ret;
-    }
 }
-
-export {UserRepo}

@@ -3,7 +3,7 @@ import { strict as assert } from 'node:assert';
 import {MySqlContainer} from "testcontainers";
 import { ddl } from "../setup/ddl.js";
 import { testUtils } from "../utils/testUtils.js";
-import { UserRepo } from "../repository/user-repository.js";
+import UserRepo from "../repository/user-repository.js";
 
 test('Testing User Repositiory', async (t) => {
     let container;
