@@ -1,4 +1,4 @@
-export default class BaseRepository{
+const dataUtils={
     formatData(data, columns){
         let ret = [];
         data.forEach((row) =>{
@@ -11,3 +11,5 @@ export default class BaseRepository{
         return ret;
     }
 }
+
+export default dataUtils
