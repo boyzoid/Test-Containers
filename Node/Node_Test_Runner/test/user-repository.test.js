@@ -5,7 +5,7 @@ import { ddl } from "../setup/ddl.js";
 import { testUtils } from "../utils/testUtils.js";
 import UserRepo from "../repository/user-repository.js";
 
-test('Testing User Repositiory', async (t) => {
+test('Testing User Repository', async (t) => {
     let container;
     let userRepo;
 

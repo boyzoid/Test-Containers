@@ -36,13 +36,13 @@ export default class UserRepo{
         const db = session.getSchema();
         const table = db.getTable('user');
         const rows = await table.select(['id', 'name'])
-            .where('name = :name')
-            .bind('name', name)
+            .where('name = :nameParam')
+            .bind('nameParam', name)
             .execute();
         const data = rows.toArray();
         const columns = rows.getColumns()
         ret = dataUtils.formatData( data, columns )
+        session.close();
         return ret;
-        
     }
 }
