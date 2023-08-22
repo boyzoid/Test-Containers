@@ -28,7 +28,6 @@ export default class RestaurantRepo{
             await collection.add(restaurant).execute();
         }
         catch(e){
-            console.log(e)
             success = false
         }
         session.close();

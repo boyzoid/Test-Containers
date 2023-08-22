@@ -32,7 +32,7 @@ test('Testing Restaurant Repository', async (t) => {
     await t.test('Should create restaurant', async(t)=>{
         const test_restaurant = testUtils.createTestRestaurant();
         const result = await restaurantRepo.addRestaurant(test_restaurant);
-        const testData = await docStoreSetup.getById(await restaurantRepo.getSession(), test_restaurant._id);
+        const testData = await docStoreSetup.getById(await restaurantRepo, test_restaurant._id);
         assert.equal(result, true);
         assert.equal(testData.length, 1);
         assert.equal(testData[0]._id, test_restaurant._id)
