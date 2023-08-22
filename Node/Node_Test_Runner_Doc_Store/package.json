@@ -1,0 +1,19 @@
+{
+  "name": "test-containers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "spec/user-repository.test.js",
+  "scripts": {
+    "test": "node --test --watch ./test"
+  },
+  "keywords": [],
+  "author": "Scott Stroz",
+  "license": "ISC",
+  "dependencies": {
+    "@mysql/xdevapi": "^8.0.33"
+  },
+  "devDependencies": {
+    "testcontainers": "^9.9.1"
+  },
+  "type": "module"
+}
