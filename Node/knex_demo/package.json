@@ -1,0 +1,20 @@
+{
+  "name": "knex_demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test/user-repository.test.js",
+  "scripts": {
+    "test": "node --test --watch ./test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "knex": "^2.5.1",
+    "mysql2": "^3.6.0"
+  },
+  "devDependencies": {
+    "testcontainers": "^9.9.1"
+  },
+  "type": "module"
+}
