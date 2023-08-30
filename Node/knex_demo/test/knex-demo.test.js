@@ -66,7 +66,7 @@ test('Testing Application', async (t) => {
         await t.test('Can add user', async(t)=>{
             const preTestCount = await dbUtils.rowCount('user');
             const user = {
-                user_type_id : await dbUtils.getRandomId('user_type', 'id'),
+                user_type_id : await dbUtils.getRandomColumnValue('user_type', 'id'),
                 first_name : testUtils.generateString(10),
                 last_name : testUtils.generateString(10),
                 email : testUtils.generateString(10)

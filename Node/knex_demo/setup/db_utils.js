@@ -41,8 +41,8 @@ export default class DbUtils{
         return result[0].count;
     }
 
-    async getRandomId( tableName, columnName ){
-        const result = await this.#myKnex.raw(`select ${columnName} as id from ${tableName} order by rand()`);
+    async getRandomColumnValue( tableName, columnName ){
+        const result = await this.#myKnex.raw(`select ${columnName} as id from ${tableName} order by rand() limit 1`);
         return result[0][0].id;
     }
 

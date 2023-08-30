@@ -2,7 +2,7 @@
   "name": "knex_demo",
   "version": "1.0.0",
   "description": "",
-  "main": "test/user-repository.test.js",
+  "main": "test/knex-demo.test.js",
   "scripts": {
     "test": "node --test --watch ./test"
   },
