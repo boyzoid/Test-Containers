@@ -10,4 +10,4 @@ const testUtils = {
     }
 }
 
-export {testUtils}
+export default testUtils;

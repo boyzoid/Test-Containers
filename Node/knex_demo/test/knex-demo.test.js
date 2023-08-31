@@ -2,7 +2,7 @@ import { test, before, after } from 'node:test';
 import { strict as assert } from 'node:assert';
 import {MySqlContainer} from "testcontainers";
 import DbUtils from "../setup/db_utils.js";
-import { testUtils } from "../utils/testUtils.js";
+import testUtils from "../utils/testUtils.js";
 import UserRepo from "../repository/user-repository.js";
 
 test('Testing Application', async (t) => {
