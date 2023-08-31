@@ -1,11 +1,13 @@
 
-export function up(knex) {
+export async function up(knex) {
+  const user_type_sql = `CREATE TABLE user_type (
+    id int unsigned NOT NULL AUTO_INCREMENT, 
+    name varchar(25) DEFAULT NULL, 
+    PRIMARY KEY (id), 
+    UNIQUE KEY user_type_name_idx (name) )`;
+  await knex.raw(user_type_sql);
+  
   return knex.schema
-    .createTable('user_type', (table)=>{
-        table.increments('id');
-        table.string('name');
-        table.unique(['name'], {indexName: 'user_type_name_idx', useConstraint:true})
-    })
     .createTable('user', (table)=>{
         table.increments('id');
         table.string('first_name', 100).notNullable();

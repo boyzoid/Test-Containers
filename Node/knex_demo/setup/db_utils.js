@@ -1,5 +1,4 @@
 import knex from 'knex';
-import mysql from 'mysql2'
 
 export default class DbUtils{
     #myKnex
@@ -21,17 +20,21 @@ export default class DbUtils{
                 tableName: 'knex_migrations'
             }
         }
-        this.#myKnex = new knex(config)
+        this.#myKnex = new knex(config);
     }
+
+    getKnex(){
+        return this.#myKnex;
+    }
+
     async runLatestMigration(){
-        console.log('Running migrations')
-        await this.#myKnex.migrate.latest({directory: './migrations'})
-        console.log('Migrations complete');
+        await this.#myKnex.migrate.latest();
     }
+
     async runSeed(){
-        await this.#myKnex.seed.run()
-        console.log('Seed complete');
+        await this.#myKnex.seed.run();
     }
+
     async tableExists(name){
         return await this.#myKnex.schema.hasTable(name);
     }
@@ -42,8 +45,8 @@ export default class DbUtils{
     }
 
     async getRandomColumnValue( tableName, columnName ){
-        const result = await this.#myKnex.raw(`select ${columnName} as id from ${tableName} order by rand() limit 1`);
-        return result[0][0].id;
+        const result = await this.#myKnex.raw(`select ${columnName} as val from ${tableName} order by rand() limit 1`);
+        return result[0][0].val;
     }
 
     async getById(id, tableName, columnName){

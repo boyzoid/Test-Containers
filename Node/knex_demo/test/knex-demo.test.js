@@ -55,13 +55,7 @@ test('Testing Application', async (t) => {
     await t.test("Testing User Repo", async(t)=>{
         let userRepo;
         before(async ()=>{
-            userRepo = new UserRepo(
-                container.getUsername(),
-                container.getUserPassword(),
-                container.getHost(),
-                container.getPort(),
-                container.getDatabase()
-                )
+            userRepo = new UserRepo(dbUtils.getKnex())
         })
         await t.test('Can add user', async(t)=>{
             const preTestCount = await dbUtils.rowCount('user');
