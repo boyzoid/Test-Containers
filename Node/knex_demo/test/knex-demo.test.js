@@ -20,9 +20,12 @@ test('Testing Application', async (t) => {
         )
         await dbUtils.runLatestMigration();
         await dbUtils.runSeed();
+
+
     })
 
     after(async ()=>{
+        await dbUtils.killKnex();
         await container.stop();
     })
     await t.test('Container should be running', async (t)=>{

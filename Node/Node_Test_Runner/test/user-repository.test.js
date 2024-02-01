@@ -4,10 +4,12 @@ import {MySqlContainer} from "testcontainers";
 import { ddl } from "../setup/ddl.js";
 import { testUtils } from "../utils/testUtils.js";
 import UserRepo from "../repository/user-repository.js";
+import DataUtils from "../utils/DataUtils.js";
 
 test('Testing User Repository', async (t) => {
     let container;
     let userRepo;
+    let dataUtils;
 
     before(async ()=>{
         container = await new MySqlContainer().withExposedPorts(3306, 33060).start();  
@@ -18,7 +20,14 @@ test('Testing User Repository', async (t) => {
             container.getMappedPort(33060),
             container.getDatabase()
             )
-        await ddl.createUserTable(await userRepo.getSession()); 
+        await ddl.createUserTable(await userRepo.getSession());
+        dataUtils = new DataUtils(
+            container.getUsername(),
+            container.getUserPassword(),
+            container.getHost(),
+            container.getMappedPort(33060),
+            container.getDatabase()
+        )
     })
 
     after(async ()=>{
@@ -32,7 +41,7 @@ test('Testing User Repository', async (t) => {
     await t.test('Should create user', async(t)=>{
         const name = testUtils.generateString(50);
         await userRepo.createUser({name: name});
-        const queryResult = await userRepo.getUserByName(name);
+        const queryResult = await dataUtils.getUserByName(name);
         assert.equal(1, queryResult.length);
         assert.equal(name, queryResult[0].name);
     })

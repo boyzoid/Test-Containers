@@ -53,4 +53,8 @@ export default class DbUtils{
         const result = await this.#myKnex.raw(`select * from ${tableName} where ${columnName} = ${id}`);
         return result[0][0];
     }
+
+    async killKnex(){
+        await this.#myKnex.destroy();
+    }
 }

@@ -1,5 +1,5 @@
 import * as mysqlx from '@mysql/xdevapi'
-export default class UserRepo{
+export default class DataUtils{
     #connectionUrl
     #pool
     constructor(dbUser, dbPassword, dbHost, dbPort, schemaName) {
@@ -19,13 +19,27 @@ export default class UserRepo{
         return await this.#pool.getSession()
     }
 
-    async createUser(user) {
+    async getUserByName(name) {
+        let ret = [];
         const session = await this.getSession();
-        const db = session.getSchema();
-        const table = db.getTable('user');
-        table.insert(['name'])
-            .values(user.name)
-            .execute();
+        const sql = `select id, name from user where name = '${name}'`
+        const rows = await session.sql(sql).execute()
+        ret =this.formatData( rows )
         session.close();
+        return ret;
+    }
+
+    formatData(rows){
+        const data = rows.toArray()
+        const columns = rows.getColumns()
+        let ret = [];
+        data.forEach((row) =>{
+            let obj = {};
+            row[0].forEach((item,i)=>{
+                obj[columns[i].getColumnLabel()] = item;
+            })
+            ret.push(obj)
+        })
+        return ret;
     }
 }
