@@ -1,4 +1,4 @@
-import { test, before, after } from 'node:test'
+import { test, describe, before, after } from 'node:test'
 import { strict as assert } from 'node:assert'
 import {MySqlContainer} from "testcontainers"
 import { faker } from '@faker-js/faker'
@@ -6,7 +6,7 @@ import { ddl } from "../setup/ddl.js"
 import UserRepo from "../repository/user-repository.js"
 import DataUtils from "../utils/DataUtils.js"
 
-test('Testing User Repository', async (t) => {
+describe('Testing User Repository', async (t) => {
     let container;
     let userRepo;
     let dataUtils;
@@ -33,12 +33,12 @@ test('Testing User Repository', async (t) => {
     after(async ()=>{
         await container.stop();
     })
-    await t.test('Container should be running', async (t)=>{
+    await test('Container should be running', async (t)=>{
         const queryResult = await container.executeQuery("SELECT 1 as res")
         assert.equal(queryResult,"res\n1\n" )
     });
 
-    await t.test('Should create user', async(t)=>{
+    await test('Should create user', async(t)=>{
         const name= faker.internet.userName()
         console.log(`Test name: ${name}.`)
         await userRepo.createUser({name: name})
