@@ -6,7 +6,7 @@ import { ddl } from "../setup/ddl.js"
 import UserRepo from "../repository/user-repository.js"
 import DataUtils from "../utils/DataUtils.js"
 
-describe('Testing User Repository', async (t) => {
+describe('Scott\'s Amazing Test Demo!!', async (t) => {
     let container;
     let userRepo;
     let dataUtils;
