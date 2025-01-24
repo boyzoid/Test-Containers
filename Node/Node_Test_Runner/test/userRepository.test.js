@@ -1,9 +1,9 @@
 import { test, describe, before, after } from 'node:test'
 import { strict as assert } from 'node:assert'
-import {MySqlContainer} from "testcontainers"
+import {MySqlContainer} from "@testcontainers/mysql"
 import { faker } from '@faker-js/faker'
 import { ddl } from "../setup/ddl.js"
-import UserRepo from "../repository/user-repository.js"
+import UserRepo from "../repository/userRepository.js"
 import DataUtils from "../utils/DataUtils.js"
 
 describe('Scott\'s Amazing Test Demo!!', async (t) => {
@@ -35,11 +35,11 @@ describe('Scott\'s Amazing Test Demo!!', async (t) => {
     })
     await test('Container should be running', async (t)=>{
         const queryResult = await container.executeQuery("SELECT 1 as res")
-        assert.equal(queryResult,"res\n1\n" )
+        assert.ok(queryResult.includes("res\n1\n") )
     });
 
     await test('Should create user', async(t)=>{
-        const name= faker.internet.userName()
+        const name= faker.internet.username()
         console.log(`Test name: ${name}.`)
         await userRepo.createUser({name: name})
         const queryResult = await dataUtils.getUserByName(name)

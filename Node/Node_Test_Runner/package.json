@@ -2,7 +2,7 @@
   "name": "test-containers",
   "version": "1.0.0",
   "description": "",
-  "main": "test/user-repository.test.js",
+  "main": "test/userRepository.test.js",
   "scripts": {
     "test": "node --test",
     "watch": "node --test --watch ./test/*"
@@ -12,7 +12,7 @@
   "license": "ISC",
   "devDependencies": {
     "@faker-js/faker": "^9.0.3",
-    "testcontainers": "^9.9.1"
+    "@testcontainers/mysql": "^10.17.1"
   },
   "type": "module",
   "dependencies": {

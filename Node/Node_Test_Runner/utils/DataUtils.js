@@ -24,7 +24,7 @@ export default class DataUtils{
         const session = await this.getSession();
         const sql = `select id, name from user where name = '${name}'`
         const rows = await session.sql(sql).execute()
-        ret =this.formatData( rows )
+        ret = this.formatData(rows)
         session.close();
         return ret;
     }
