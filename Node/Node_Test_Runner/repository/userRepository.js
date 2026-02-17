@@ -1,31 +1,28 @@
-import * as mysqlx from '@mysql/xdevapi'
+import mysql from 'mysql2/promise'
+
 export default class UserRepo{
-    #connectionUrl
     #pool
     constructor(dbUser, dbPassword, dbHost, dbPort, schemaName) {
-        this.#connectionUrl =
-            `mysqlx://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${schemaName}`
-        this.#pool = mysqlx.getClient(this.#connectionUrl, {
-            pooling: {
-                enabled: true,
-                maxSize: 10,
-                maxIdleTime: 20000,
-                queueTimeout: 5000
-            }
+        // Switch from X DevAPI to mysql2 (classic protocol)
+        this.#pool = mysql.createPool({
+            host: dbHost,
+            port: dbPort, // expect classic port (3306)
+            user: dbUser,
+            password: dbPassword,
+            database: schemaName,
+            waitForConnections: true,
+            connectionLimit: 10,
         })
     }
 
+    // Keep the same method name to minimize test changes
     async getSession(){
-        return await this.#pool.getSession()
+        // Return the pool which supports .execute()
+        return this.#pool
     }
 
     async createUser(user) {
         const session = await this.getSession();
-        const db = session.getSchema();
-        const table = db.getTable('user');
-        table.insert(['name'])
-            .values(user.name)
-            .execute();
-        session.close();
+        await session.execute('INSERT INTO `user` (name) VALUES (?)', [user.name])
     }
 }

@@ -12,12 +12,13 @@ describe('Scott\'s Amazing Test Demo!!', async (t) => {
     let dataUtils;
 
     before(async ()=>{
-        container = await new MySqlContainer().withExposedPorts(3306, 33060).start();  
+        // Explicitly set image to avoid environment-specific defaults issues
+        container = await new MySqlContainer('mysql:8.4').withExposedPorts(3306, 33060).start();  
         userRepo = new UserRepo(
             container.getUsername(),
             container.getUserPassword(),
             container.getHost(),
-            container.getMappedPort(33060),
+            container.getMappedPort(3306),
             container.getDatabase()
             )
         await ddl.createUserTable(await userRepo.getSession());
@@ -25,7 +26,7 @@ describe('Scott\'s Amazing Test Demo!!', async (t) => {
             container.getUsername(),
             container.getUserPassword(),
             container.getHost(),
-            container.getMappedPort(33060),
+            container.getMappedPort(3306),
             container.getDatabase()
         )
     })
